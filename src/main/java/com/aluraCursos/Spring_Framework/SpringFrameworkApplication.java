@@ -24,6 +24,8 @@ public class SpringFrameworkApplication implements CommandLineRunner {
 		var convert = new CombinesDatas();
 
 		//llamamos al metodo par acombertir datos
+		//
+
 
 		var datas = convert.getDatas(json, SerieDatas.class);
 		System.out.println(datas);

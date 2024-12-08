@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class  CombinesDatas implements ICombinesData {
     //vamos a mapear losd atos que vienen de la api.
     private ObjectMapper odjectMapper = new ObjectMapper();
-
-
     //Se crea la interfas
     @Override
     public <T> T getDatas(String json, Class<T> clase) {

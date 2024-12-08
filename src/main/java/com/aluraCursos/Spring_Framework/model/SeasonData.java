@@ -3,11 +3,14 @@ package com.aluraCursos.Spring_Framework.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 //cin esto ignora los campos que nomapeamos en esta clase
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record SerieDatas(
-        @JsonAlias("Title") String titulo,
-        @JsonAlias("totalSeasons") Integer totalDeTemporadas,
-        @JsonAlias("imdbRating") String evaluacion
+public record SeasonData(
+        //Creamos una lista de eposodeos
+        @JsonAlias("Season") Integer numero,
+        @JsonAlias("Episodes") List<SerieDatas> episodeos
+
 ) {
 }

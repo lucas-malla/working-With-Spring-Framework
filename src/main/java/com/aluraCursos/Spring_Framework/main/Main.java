@@ -42,6 +42,7 @@ public class Main {
             //los agramos al Array
             season.add(seasonData);
         }
-        season.forEach(System.out::println);
+        //Trbajando con funciones lamdba
+        season.forEach(t -> t.episodeos().forEach(e -> System.out.println(e.titulo())));
     }
 }

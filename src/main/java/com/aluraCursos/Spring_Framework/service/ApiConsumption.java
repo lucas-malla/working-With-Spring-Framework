@@ -1,6 +1,4 @@
 package com.aluraCursos.Spring_Framework.service;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;

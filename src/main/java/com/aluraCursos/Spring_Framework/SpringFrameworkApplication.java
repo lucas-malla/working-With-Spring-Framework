@@ -16,6 +16,4 @@ public class SpringFrameworkApplication implements CommandLineRunner {
 		Main main = new Main();
 		main.showsTheMenu();
 	}
-
-
 }

@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 //cin esto ignora los campos que nomapeamos en esta clase
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record SerieDatas(
-        @JsonAlias("Title") String titulo,
-        @JsonAlias("totalSeasons") Integer totalDeTemporadas,
+        @JsonAlias("Title") String title,
+        @JsonAlias("totalSeasons") Integer totalSeasons ,
         @JsonAlias("imdbRating") String evaluacion
 ) {
 }

@@ -7,7 +7,9 @@ import com.aluraCursos.Spring_Framework.model.SeasonData;
 import com.aluraCursos.Spring_Framework.model.SerieDatas;
 import com.aluraCursos.Spring_Framework.service.ApiConsumption;
 import com.aluraCursos.Spring_Framework.service.CombinesDatas;
+import com.aluraCursos.Spring_Framework.model.Serie;
 
+import javax.sql.rowset.serial.SerialException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.List;
@@ -53,6 +55,7 @@ public class Main {
             }
         }
 }
+//Creasiones de las funciones de las instancias1
         private  SerieDatas getSerieDatas(){
             System.out.println("Enter the name of the Series you want to watch");
             var serieName = scanner.nextLine();
@@ -79,63 +82,16 @@ public class Main {
             serieDatas.add(datas);
             System.out.println(datas);
         }
+
        private void showSeriesSearched(){
-            serieDatas.forEach(System.out::println);
+           List<Serie> serie = new ArrayList<>();
+           serie = serieDatas.stream()
+                   .map(d -> new Serie(d))
+                   .collect(Collectors.toList());
+
+           serie.stream()
+                   .sorted(Comparator.comparing(Serie::getGenre))
+                   .forEach(System.out::println);
         }
-
- /*
-        System.out.println("enter the name of the series ");
-        //tenemso qye tratar el espasio que va entre pañabras . Lo hacemos econ el metodo REPLASE().
-        //Siempre que encuntre un espacio lo va a remplasar con un "+".
-        var json = apiConsumption.getDatas(URL_BASE + nameSerie.replace(" ", "+") + API_KEY);
-        //combertimos los tados de la SERIE en OBJETOS del tipo JAVA
-        var datas = combinesDatas.getDatas(json, SerieDatas.class);
-
-        //Bucamos los tados de la temporada.
-        //Creamos un array list pra recorrer las temporadas
-        List<SeasonData> season = new ArrayList<>();
-        //creamos un for para recorer el Array.
-        for (int i = 1; i <= datas.totalDeTemporadas(); i++) {
-            json = apiConsumption.getDatas(URL_BASE + nameSerie.replace(" ", "+") + "&Season=" + i + API_KEY);
-            var seasonData = combinesDatas.getDatas(json, SeasonData.class);
-            //los agramos al Array
-            season.add(seasonData);
-        }
-
-
-        //season.forEach(t -> t.episodeos().forEach(e -> System.out.println(e.evaluacion())));
-        //season.forEach(System.out::println);
-
-        //comvertir todas las informacion a una lista de datos episodeos.
-        List<EpisodeDatas> episodeData = season.stream()
-                .flatMap(t -> t.episodeos().stream())
-                .collect(Collectors.toList());
-
-
-        //Convirtiendo los datos de una lista del tipo episodeo
-        List<Episode> episodeList = season.stream()
-                .flatMap(t -> t.episodeos().stream()
-                        .map(d -> new Episode(t.number(), d)))
-                .collect(Collectors.toList());
-        season.forEach(System.out::println);
-
-        //vamos a filtrar nuestras temporada por puntuacion
-
-        Map<Integer, Double> evalutionSeasson = episodeList.stream()
-                .filter(e -> e.getEvaluation() > 0.0)
-                .collect(Collectors.groupingBy(Episode::getSeason,
-                        Collectors.averagingDouble(Episode::getEvaluation)));
-        System.out.println(evalutionSeasson);
-
-        DoubleSummaryStatistics est = episodeList.stream()
-                .filter(e -> e.getEvaluation() > 0.0)
-                .collect(Collectors.summarizingDouble(Episode::getEvaluation));
-        System.out.println("Media de la evaluacion : " + est.getAverage());
-        System.out.println("Episodeo Mejor evaluado : " + est.getMax());
-        System.out.println("Episodeo menor evaluado : " + est.getMin());
-    }
-
-    }
-         */
 
 }
